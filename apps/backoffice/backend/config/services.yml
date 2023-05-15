@@ -1,0 +1,11 @@
+services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+
+  qm\Apps\Backoffice\Backend\Controller\:
+    resource: '../src/Controller'
+    tags: ['controller.service_arguments']
+
+  qm\:
+    resource: '../../../../src'

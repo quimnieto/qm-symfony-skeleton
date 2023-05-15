@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+  qm_nginx:
+    container_name: qm-nginx
+    build:
+      context: .
+      dockerfile: nginx/dockerfile
+    volumes:
+      - ../:/var/www/qm-symfony/
+    ports:
+      - "8001:8001"
+      - "8002:8002"
+    networks:
+      - symfony
+    links:
+      - qm-php
+    depends_on:
+      - qm-php
+
+  qm-php:
+    container_name: qm-php
+    build:
+      context: .
+      dockerfile: php/dockerfile
+    environment:
+      APP_ENV: dev
+    volumes:
+      - ../:/var/www/qm-symfony/
+    depends_on:
+      - qm-backoffice_db
+    networks:
+      - symfony
+
+  qm-backoffice_db:
+    container_name: qm-backoffice-db
+    image: mysql
+    command: [ '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-authentication-plugin=mysql_native_password' ]
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "--user=root", "--password=", "--host=127.0.0.1", "ping", "--silent" ]
+      interval: 2s
+      timeout: 10s
+      retries: 10
+    networks:
+      - symfony
+
+networks:
+  symfony:
