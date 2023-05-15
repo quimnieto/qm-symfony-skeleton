@@ -8,5 +8,7 @@
 /var/
 /vendor/
 /.idea/
+/tmp
+/apps/*/*/var/
 /docker/mysql/
 ###< symfony/framework-bundle ###
