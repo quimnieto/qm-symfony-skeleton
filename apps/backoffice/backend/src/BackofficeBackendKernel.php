@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace qm\Apps\Backoffice\Backend;
+namespace Qm\Apps\Backoffice\Backend;
 
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;

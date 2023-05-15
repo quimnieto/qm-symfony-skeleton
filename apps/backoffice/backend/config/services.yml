@@ -3,9 +3,9 @@ services:
     autoconfigure: true
     autowire: true
 
-  qm\Apps\Backoffice\Backend\Controller\:
+  Qm\Apps\Backoffice\Backend\Controller\:
     resource: '../src/Controller'
     tags: ['controller.service_arguments']
 
-  qm\:
+  Qm\:
     resource: '../../../../src'

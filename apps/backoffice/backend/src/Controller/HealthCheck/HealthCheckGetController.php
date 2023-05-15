@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace qm\Apps\Backoffice\Backend\Controller\HealthCheck;
+namespace Qm\Apps\Backoffice\Backend\Controller\HealthCheck;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

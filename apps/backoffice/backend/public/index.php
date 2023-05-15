@@ -1,6 +1,6 @@
 <?php
 
-use qm\Apps\Backoffice\Backend\BackofficeBackendKernel;
+use Qm\Apps\Backoffice\Backend\BackofficeBackendKernel;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
 
