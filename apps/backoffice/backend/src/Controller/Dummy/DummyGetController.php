@@ -8,7 +8,7 @@ use Qm\Backoffice\Dummy\Application\Dummy;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class DummyGetController
+Readonly class DummyGetController
 {
     public function __construct(private Dummy $dummy)
     {
@@ -18,7 +18,7 @@ class DummyGetController
     {
         return new JsonResponse(
             [
-                'dummy' => $this->dummy->execute(),
+                $this->dummy->execute(),
             ]
         );
     }
