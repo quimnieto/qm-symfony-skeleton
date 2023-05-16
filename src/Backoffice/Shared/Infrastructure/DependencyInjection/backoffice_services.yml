@@ -1,0 +1,19 @@
+services:
+  # Databases
+  Doctrine\ORM\EntityManager:
+    factory: [ Qm\Backoffice\Shared\Infrastructure\Doctrine\BackofficeEntityManagerFactory, create ]
+    arguments:
+      - driver: '%env(BACKOFFICE_DATABASE_DRIVER)%'
+        host: '%env(BACKOFFICE_DATABASE_HOST)%'
+        port: '%env(BACKOFFICE_DATABASE_PORT)%'
+        dbname: '%env(BACKOFFICE_DATABASE_NAME)%'
+        user: '%env(BACKOFFICE_DATABASE_USER)%'
+        password: '%env(BACKOFFICE_DATABASE_PASSWORD)%'
+      - '%env(APP_ENV)%'
+    tags:
+      - { name: codely.database_connection }
+    public: true
+
+
+  # Courses
+  Qm\Backoffice\Clients\Domain\Repository\ClientRepository: '@Qm\Backoffice\Clients\Infrastructure\Persistence\DoctrineClientRepository'
