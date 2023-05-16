@@ -8,6 +8,7 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ramsey/uuid": "*",
         "symfony/console": "6.2.*",
         "symfony/dependency-injection": "6.2.*",
         "symfony/dotenv": "6.2.*",
