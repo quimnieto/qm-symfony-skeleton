@@ -4,7 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <embeddable name="Qm\Backoffice\Clients\Domain\Aggregate\ClientFirst-Name">
+    <embeddable name="Qm\Backoffice\Clients\Domain\Aggregate\ClientFirstName">
         <field name="value" type="string" column="first_name" />
     </embeddable>
 

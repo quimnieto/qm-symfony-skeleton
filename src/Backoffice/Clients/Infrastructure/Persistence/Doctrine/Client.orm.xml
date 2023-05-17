@@ -7,8 +7,8 @@
     <entity name="Qm\Backoffice\Clients\Domain\Aggregate\Client" table="clients">
         <id name="id" type="client_id" column="id" length="36" />
 
-        <embedded name="first_name" class="Qm\Backoffice\Clients\Domain\Aggregate\ClientFirstName" use-column-prefix="false" />
-        <embedded name="last_name" class="Qm\Backoffice\Clients\Domain\Aggregate\ClientLastName" use-column-prefix="false" />
+        <embedded name="clientFirstName" class="Qm\Backoffice\Clients\Domain\Aggregate\ClientFirstName" use-column-prefix="false" />
+        <embedded name="clientLastName" class="Qm\Backoffice\Clients\Domain\Aggregate\ClientLastName" use-column-prefix="false" />
     </entity>
 
 </doctrine-mapping>
