@@ -1,5 +1,6 @@
 hello:
-	@echo "Hello titii!"
+	@echo "Hello!!!"
 
 clean-cache:
-    php apps/backoffice/backend/bin/console cache:warmup
+	@rm -rf apps/*/*/var
+	@docker exec qm-php ./apps/backoffice/backend/bin/console cache:warmup
