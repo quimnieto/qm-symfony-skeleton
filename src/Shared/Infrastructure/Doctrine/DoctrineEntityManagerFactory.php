@@ -14,16 +14,23 @@ use Doctrine\DBAL\Platforms\MariaDBPlatform;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Driver\SimplifiedXmlDriver;
 use Doctrine\ORM\ORMSetup;
+use Qm\Shared\Infrastructure\Doctrine\Dbal\DoctrineCustomType;
 use RuntimeException;
 use function Lambdish\Phunctional\dissoc;
 
 final class DoctrineEntityManagerFactory
 {
     private static array $sharedPrefixes = [
-        __DIR__ . '/../../../Shared/Infrastructure/Persistence/Mappings' => 'CodelyTv\Shared\Domain',
+        __DIR__ . '/../../../Shared/Infrastructure/Doctrine' => 'Qm\Shared\Domain\Aggregate',
     ];
 
     /**
+     * @param array $parameters
+     * @param array $contextPrefixes
+     * @param bool $isDevMode
+     * @param string $schemaFile
+     * @param DoctrineCustomType[] $dbalCustomTypesClasses
+     * @return EntityManager
      * @throws Exception
      * @throws ORMException
      */
@@ -32,13 +39,14 @@ final class DoctrineEntityManagerFactory
         array  $contextPrefixes,
         bool   $isDevMode,
         string $schemaFile,
-        array  $dbalCustomTypesClasses
+        array $dbalCustomTypesClasses
     ): EntityManager {
+
         if ($isDevMode) {
             DoctrineEntityManagerFactory::generateDatabaseIfNotExists($parameters, $schemaFile);
         }
 
-        DbalCustomTypesRegistrar::register($dbalCustomTypesClasses);
+        DbalCustomTypesRegistrar::register(...$dbalCustomTypesClasses);
 
         return EntityManager::create($parameters, self::createConfiguration($contextPrefixes, $isDevMode));
     }
@@ -58,7 +66,6 @@ final class DoctrineEntityManagerFactory
 
         if (!self::databaseExists($databaseName, $schemaManager)) {
             $schemaManager->createDatabase($databaseName);
-
             $connection->exec(sprintf('USE %s', $databaseName));
             $connection->exec(file_get_contents(realpath($schemaFile)));
         }

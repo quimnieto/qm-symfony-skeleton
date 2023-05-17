@@ -18,18 +18,13 @@ readonly final class ClientsPutController
 
     public function __invoke(string $id, Request $request): JsonResponse
     {
-//        $command = new CreateClientCommand(
-//            $id,
-//            (string) $request->get('firstName'),
-//            (string) $request->get('lastName'),
-//        );
+        $parameters = json_decode($request->getContent(), true);
 
         $command = new CreateClientCommand(
             $id,
-            'LEL',
-            'LOL',
+            $parameters['firstName'],
+            $parameters['lastName'],
         );
-
 
         $this->clientCreator->create($command);
 

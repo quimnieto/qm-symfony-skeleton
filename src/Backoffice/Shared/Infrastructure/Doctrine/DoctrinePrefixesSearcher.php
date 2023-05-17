@@ -47,6 +47,6 @@ final class DoctrinePrefixesSearcher
 
     private static function namespaceFormatter(string $baseNamespace): callable
     {
-        return static fn (string $path, string $module) => "$baseNamespace\\$module\Domain";
+        return static fn (string $path, string $module) => "$baseNamespace\\$module\Domain\Aggregate";
     }
 }

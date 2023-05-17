@@ -19,8 +19,8 @@ class ClientsSearcher
             ...array_map(
                 fn (Client $client) => new ClientResponse(
                 $client->id()->value(),
-                $client->firstName()->value(),
-                $client->lastName()->value(),
+                $client->clientFirstName()->value(),
+                $client->clientLastName()->value(),
             ),
                 [$testClient]
             )

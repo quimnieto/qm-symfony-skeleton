@@ -58,9 +58,15 @@ final class DbalTypesSearcher
             $namespaces = map(
                 static function (string $file) use ($path, $contextName) {
                     $fullPath     = "$path/$file";
+
                     $splittedPath = explode("/src/$contextName/", $fullPath);
 
                     $classWithoutPrefix = str_replace(['.php', '/'], ['', '\\'], $splittedPath[1]);
+
+                    $class = "Qm\\$contextName\\$classWithoutPrefix";
+                    $object = new $class();
+
+                    return $object;
 
                     return "Qm\\$contextName\\$classWithoutPrefix";
                 },
