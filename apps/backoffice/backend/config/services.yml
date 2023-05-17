@@ -1,3 +1,6 @@
+imports:
+  - { resource: ../../../../src/Backoffice/Shared/Infrastructure/DependencyInjection/backoffice_services.yml }
+
 services:
   _defaults:
     autoconfigure: true

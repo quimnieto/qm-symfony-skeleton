@@ -11,9 +11,9 @@ services:
         password: '%env(BACKOFFICE_DATABASE_PASSWORD)%'
       - '%env(APP_ENV)%'
     tags:
-      - { name: codely.database_connection }
+      - { name: Qm.database_connection }
     public: true
 
 
-  # Courses
+  # Clients
   Qm\Backoffice\Clients\Domain\Repository\ClientRepository: '@Qm\Backoffice\Clients\Infrastructure\Persistence\DoctrineClientRepository'

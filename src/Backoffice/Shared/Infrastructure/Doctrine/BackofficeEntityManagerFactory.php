@@ -11,7 +11,7 @@ use Qm\Shared\Infrastructure\Doctrine\DoctrineEntityManagerFactory;
 
 final class BackofficeEntityManagerFactory
 {
-    private const SCHEMA_PATH = __DIR__ . '/../../../../../etc/databases/mooc.sql';
+    private const SCHEMA_PATH = __DIR__ . '/../../../../../databases/backoffice.sql';
 
     /**
      * @throws Exception
@@ -22,11 +22,10 @@ final class BackofficeEntityManagerFactory
         $isDevMode = 'prod' !== $environment;
 
         $prefixes = array_merge(
-            DoctrinePrefixesSearcher::inPath(__DIR__ . '/../../../../Mooc', 'CodelyTv\Mooc'),
-            DoctrinePrefixesSearcher::inPath(__DIR__ . '/../../../../Backoffice', 'CodelyTv\Backoffice')
+            DoctrinePrefixesSearcher::inPath(__DIR__ . '/../../../../Backoffice', 'Qm\Backoffice')
         );
 
-        $dbalCustomTypesClasses = DbalTypesSearcher::inPath(__DIR__ . '/../../../../Mooc', 'Mooc');
+        $dbalCustomTypesClasses = DbalTypesSearcher::inPath(__DIR__ . '/../../../../Backoffice', 'Backoffice');
 
         return DoctrineEntityManagerFactory::create(
             $parameters,

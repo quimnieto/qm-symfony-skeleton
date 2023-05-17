@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Qm\Backoffice\Clients\Domain\Aggregate;
 
-class Client
+use Qm\Shared\Domain\Aggregate\AggregateRoot;
+
+class Client extends AggregateRoot
 {
     public function __construct(
         private ClientId $id,
