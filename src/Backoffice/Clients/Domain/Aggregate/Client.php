@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Qm\Backoffice\Clients\Domain\Aggregate;
 
+use Qm\Backoffice\Clients\Domain\Event\ClientCreatedEvent;
 use Qm\Shared\Domain\Aggregate\AggregateRoot;
 
 class Client extends AggregateRoot
@@ -17,14 +18,18 @@ class Client extends AggregateRoot
 
     public static function fromPrimitives(
         string $id,
-        string $fistName,
+        string $firstName,
         string $lastName,
     ): self {
-        return new self(
-            new ClientId($id),
-            new ClientFirstName($fistName),
-            new ClientLastName($lastName)
+        $client = new self(
+            ClientId::of($id),
+            ClientFirstName::of($firstName),
+            ClientLastName::of($lastName)
         );
+
+        $client->record(new ClientCreatedEvent($id, $firstName, $lastName));
+
+        return $client;
     }
 
     public function id(): ClientId
