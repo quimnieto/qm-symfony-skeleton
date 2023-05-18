@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Qm\Apps\Backoffice\Backend\Controller\Clients;
 
-use Qm\Backoffice\Clients\Application\Create\ClientCreator;
 use Qm\Backoffice\Clients\Application\Create\CreateClientCommand;
+use Qm\Shared\Domain\Bus\Command\CommandBus;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 readonly final class ClientsPutController
 {
-    public function __construct(private ClientCreator $clientCreator)
+    public function __construct(private CommandBus $bus)
     {
     }
 
@@ -26,7 +26,7 @@ readonly final class ClientsPutController
             $parameters['lastName'],
         );
 
-        $this->clientCreator->create($command);
+        $this->bus->dispatch($command);
 
        return new JsonResponse([], Response::HTTP_CREATED);
     }

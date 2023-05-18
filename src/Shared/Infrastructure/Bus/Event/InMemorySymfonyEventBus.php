@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Qm\Shared\Infrastructure\Bus;
+namespace Qm\Shared\Infrastructure\Bus\Event;
 
 use Qm\Shared\Domain\Bus\Event\DomainEvent;
 use Qm\Shared\Domain\Bus\Event\DomainEventSubscriber;
 use Qm\Shared\Domain\Bus\Event\EventBus;
+use Qm\Shared\Infrastructure\Bus\CallableFirstParameterExtractor;
 use Symfony\Component\Messenger\Exception\NoHandlerForMessageException;
 use Symfony\Component\Messenger\Handler\HandlersLocator;
 use Symfony\Component\Messenger\MessageBus;

@@ -1,6 +1,9 @@
 hello:
 	@echo "Hello!!!"
 
+up:
+	cd docker && docker-compose up
+
 clean-cache:
 	@rm -rf apps/*/*/var
 	@docker exec qm-php ./apps/backoffice/backend/bin/console cache:warmup

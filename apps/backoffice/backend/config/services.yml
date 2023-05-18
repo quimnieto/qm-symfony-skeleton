@@ -6,14 +6,21 @@ services:
     autoconfigure: true
     autowire: true
 
+  # -- TAGS --
   _instanceof:
     Qm\Shared\Domain\Bus\Event\DomainEventSubscriber:
       tags: [ 'qm.domain_event_subscriber' ]
 
-    # -- TAGGING --
-  Qm\Shared\Infrastructure\Bus\Event\InMemory\InMemorySymfonyEventBus:
+    Qm\Shared\Domain\Bus\Command\CommandHandler:
+      tags: [ 'qm.command_handler' ]
+
+
+  Qm\Shared\Infrastructure\Bus\Event\InMemorySymfonyEventBus:
     arguments: [ !tagged qm.domain_event_subscriber ]
     lazy: true
+
+  Qm\Shared\Infrastructure\Bus\Command\InMemorySymfonyCommandBus:
+    arguments: [ !tagged qm.command_handler ]
 
   Qm\Apps\Backoffice\Backend\Controller\:
     resource: '../src/Controller'

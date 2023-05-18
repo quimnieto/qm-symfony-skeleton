@@ -2,18 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Backoffice\Clients\Application\Create;
+namespace Tests\Backoffice\Clients\Application\Create;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Qm\Backoffice\Clients\Application\Create\ClientCreator;
 use Qm\Backoffice\Clients\Application\Create\CreateClientCommand;
-use Qm\Backoffice\Clients\Domain\Aggregate\Client;
 use Qm\Backoffice\Clients\Domain\Repository\ClientRepository;
+use Qm\Shared\Domain\Bus\Event\EventBus;
+use Tests\Backoffice\Clients\Domain\Aggregate\ClientMother;
 
 class ClientCreatorTest extends TestCase
 {
     private MockObject $repository;
+    private MockObject $bus;
     private ClientCreator $sut;
 
     protected function setUp(): void
@@ -21,8 +23,9 @@ class ClientCreatorTest extends TestCase
         parent::setUp();
 
         $this->repository = $this->createMock(ClientRepository::class);
+        $this->bus = $this->createMock(EventBus::class);
 
-        $this->sut = new ClientCreator($this->repository);
+        $this->sut = new ClientCreator($this->repository, $this->bus);
     }
 
     public function test_create_new_client(): void
@@ -33,7 +36,7 @@ class ClientCreatorTest extends TestCase
             'Palomo'
         );
 
-        $client = Client::fromPrimitives(
+        $client = ClientMother::create(
             $command->id,
             $command->firstName,
             $command->lastName
