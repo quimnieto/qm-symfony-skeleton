@@ -7,13 +7,17 @@ namespace Qm\Backoffice\Clients\Application\Search;
 use Qm\Backoffice\Clients\Application\Response\ClientResponse;
 use Qm\Backoffice\Clients\Application\Response\ClientsListResponse;
 use Qm\Backoffice\Clients\Domain\Aggregate\Client;
-use Qm\Shared\Domain\ValueObject\Uuid;
+use Qm\Backoffice\Clients\Domain\Repository\ClientRepository;
 
 class ClientsSearcher
 {
+    public function __construct(private readonly ClientRepository $repository)
+    {
+    }
+
     public function search(): ClientsListResponse
     {
-        $testClient = Client::fromPrimitives(Uuid::random()->value(), 'john', 'smith');
+        $clientsList = $this->repository->searchAll();
 
         return new ClientsListResponse(
             ...array_map(
@@ -22,7 +26,7 @@ class ClientsSearcher
                 $client->clientFirstName()->value(),
                 $client->clientLastName()->value(),
             ),
-                [$testClient]
+                $clientsList
             )
         );
     }
