@@ -6,6 +6,15 @@ services:
     autoconfigure: true
     autowire: true
 
+  _instanceof:
+    Qm\Shared\Domain\Bus\Event\DomainEventSubscriber:
+      tags: [ 'qm.domain_event_subscriber' ]
+
+    # -- TAGGING --
+  Qm\Shared\Infrastructure\Bus\Event\InMemory\InMemorySymfonyEventBus:
+    arguments: [ !tagged qm.domain_event_subscriber ]
+    lazy: true
+
   Qm\Apps\Backoffice\Backend\Controller\:
     resource: '../src/Controller'
     tags: ['controller.service_arguments']
