@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Qm\Apps\Backoffice\Backend\Controller\Clients;
 
+use Qm\Backoffice\Clients\Application\Create\ClientCreator;
 use Qm\Backoffice\Clients\Application\Create\CreateClientCommand;
 use Qm\Shared\Domain\Bus\Command\CommandBus;
 use Symfony\Component\HttpFoundation\JsonResponse;

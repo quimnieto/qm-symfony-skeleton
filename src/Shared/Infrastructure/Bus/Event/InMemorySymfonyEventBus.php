@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Qm\Shared\Infrastructure\Bus\Event;
 
 use Qm\Shared\Domain\Bus\Event\DomainEvent;
-use Qm\Shared\Domain\Bus\Event\DomainEventSubscriber;
 use Qm\Shared\Domain\Bus\Event\EventBus;
 use Qm\Shared\Infrastructure\Bus\CallableFirstParameterExtractor;
 use Symfony\Component\Messenger\Exception\NoHandlerForMessageException;
@@ -17,7 +16,7 @@ class InMemorySymfonyEventBus implements EventBus
 {
     private MessageBus $bus;
 
-    public function __construct(DomainEventSubscriber ...$subscribers)
+    public function __construct(iterable $subscribers)
     {
         $this->bus = new MessageBus(
             [
