@@ -13,6 +13,9 @@ services:
     Qm\Shared\Domain\Bus\Command\CommandHandler:
       tags: [ 'qm.command_handler' ]
 
+    Qm\Shared\Domain\Bus\Query\QueryHandler:
+      tags: [ 'qm.query_handler' ]
+
   # Wire
   Qm\Apps\Backoffice\Backend\Controller\:
     resource: '../src/Controller'
@@ -35,3 +38,7 @@ services:
   Qm\Shared\Infrastructure\Bus\Command\InMemorySymfonyCommandBus:
     tags: ['qm.command_bus']
     arguments: [ !tagged qm.command_handler ]
+
+  Qm\Shared\Infrastructure\Bus\Query\InMemorySymfonyQueryBus:
+    tags: [ 'qm.query_bus' ]
+    arguments: [ !tagged qm.query_handler ]

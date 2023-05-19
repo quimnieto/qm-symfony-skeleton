@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Qm\Backoffice\Clients\Application\Response;
 
- final readonly class ClientsListResponse
+ use Qm\Shared\Domain\Bus\Query\Response;
+
+ final readonly class ClientsListResponse implements Response
 {
     public array $clients;
 
